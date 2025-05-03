@@ -24,51 +24,25 @@ cmd({
     } else {
       hostname = os.hostname();
     }
-        const menuCaption = `
-        ❖─👨‍💻 𝙷𝙾𝚁𝙸𝚉𝙾𝙽 - 𝙼𝙳 𝚅𝟸 👨‍💻─❖\n\n╭───═❮ *ᴍᴇɴᴜ ʟɪsᴛ* ❯═───❖\n│*𝗛𝗘𝗬 ${pushname} 👋*\n│ *🚀𝙑𝙀𝙍𝙎𝙄𝙊𝙉:* ${require("../package.json").version}\n│ *⌛𝙈𝙀𝙈𝙊𝙍𝙔:* ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB\n│ *🕒𝙍𝙐𝙉𝙏𝙄𝙈𝙀:* ${runtime(process.uptime())}\n│ *📍𝙋𝙇𝘼𝙏𝙁𝙊𝙍𝙈:* ${hostname}\n╰━━━━━━━━━━━━━━━┈⊷
+        const menuCaption = `❖─👨‍💻 𝙷𝙾𝚁𝙸𝚉𝙾𝙽 - 𝙼𝙳 𝚅𝟸 👨‍💻─❖\n\n╭───═❮ *ᴍᴇɴᴜ ʟɪsᴛ* ❯═───❖\n│*𝗛𝗘𝗬* ${pushname} *👋*\n│ *🚀𝙑𝙀𝙍𝙎𝙄𝙊𝙉:* ${require("../package.json").version}\n│ *⌛𝙈𝙀𝙈𝙊𝙍𝙔:* ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB\n│ *🕒𝙍𝙐𝙉𝙏𝙄𝙈𝙀:* ${runtime(process.uptime())}\n│ *📍𝙋𝙇𝘼𝙏𝙁𝙊𝙍𝙈:* ${hostname}\n╰━━━━━━━━━━━━━━━┈⊷
         
         
-        
-        ╭━━━〔 *${config.BOT_NAME}* 〕━━━┈⊷
-┃◈╭──❍「 *USER INFO* 」❍
-┃◈├• 👑 Owner : *${config.OWNER_NAME}*
-┃◈├• 🤖 Baileys : *Multi Device*
-┃◈├• 🖥️ Type : *NodeJs*
-┃◈├• 🚀 Platform : *Heroku*
-┃◈├• ⚙️ Mode : *[${config.MODE}]*
-┃◈├• 🔣 Prefix : *[${config.PREFIX}]*
-┃◈├• 🏷️ Version : *2.0.0 Bᴇᴛᴀ*
-┃◈╰─┬─★─☆──♪♪─❍
-┃◈╭─┴❍「 *BOT STATUS* 」❍
-┃◈├• 1  📜 *Main Menu*
-┃◈├• 2  👑 *Owner Menu*
-┃◈├• 3  📥 *Download Menu*
-┃◈├• 4  👥 *Group Menu*
-┃◈├• 5  🤣 *Fun Menu*
-┃◈├• 6  🤖 *AI Menu*
-┃◈├• 7  🎎 *Anime Menu*
-┃◈├• 8  ♻️ *Convert Menu*
-┃◈├• 9  📌 *Other Menu*
-┃◈├• 10 💔 *Reactions Menu*
-┃◈╰─┬─★─☆──♪♪─❍
-┃◈╰─┬────────────●●►
-┃◈╭─┴────────────●●►
-┃◈├•ʀᴇᴘʟʏ ᴛʜᴇ ɴᴜᴍʙᴇʀ sᴇʟᴇᴄᴛ
-┃◈╰──────────────●●►
+┃ 1  📜 *Main Menu*
+┃ 2  👑 *Owner Menu*
+┃ 3  📥 *Download Menu*
+┃ 4  👥 *Group Menu*
+┃ 5  🤣 *Fun Menu*
+┃ 6  🤖 *AI Menu*
+┃ 7  🎎 *Anime Menu*
+┃ 8  ♻️ *Convert Menu*
+┃ 9  📌 *Other Menu*
+┃ 10 💔 *Reactions Menu*
 ╰━━━━━━━━━━━━━━━━━━┈⊷
 
-> ${config.DESCRIPTION}`;
 
-        const contextInfo = {
-            mentionedJid: [m.sender],
-            forwardingScore: 999,
-            isForwarded: true,
-            forwardedNewsletterMessageInfo: {
-                newsletterJid: '120363401051383340@newsletter',
-                newsletterName: '𝚃𝙴𝙲𝙷-𝙷𝙾𝚁𝙸𝚉𝙾𝙽',
-                serverMessageId: 143
-            }
-        };
+> *© ᴩᴏᴡᴇʀᴇᴅ ʙʏ ᴛᴇᴄʜ-ʜᴏʀɪᴢᴏɴ*`;
+
+
 
         // Function to send menu image with timeout
         const sendMenuImage = async () => {
