@@ -1,77 +1,46 @@
 const config = require('../config');
 const { cmd, commands } = require('../command');
 
-cmd({
-    pattern: "ping",
-    alias: ["speed","pong"],use: '.ping',
-    desc: "Check bot's response time.",
-    category: "main",
-    react: "🕹️",
-    filename: __filename
-},
-async (conn, mek, m, { from, quoted, sender, reply }) => {
-    try {
-        const start = new Date().getTime();
+const commandConfig = {
+  pattern: "ping",
+  react: '📟',
+  alias: ["speed", "cyber_ping"],
+  desc: "To Check bot's ping",
+  category: "main",
+  use: ".ping",
+  filename: __filename
+};
 
-        const reactionEmojis = ['🔥', '⚡', '🚀', '💨', '🎯', '🎉', '🌟', '💥', '🕐', '🔹'];
-        const textEmojis = ['💎', '🏆', '⚡️', '🚀', '🎶', '🌠', '🌀', '🔱', '🛡️', '✨'];
-
-        const reactionEmoji = reactionEmojis[Math.floor(Math.random() * reactionEmojis.length)];
-        let textEmoji = textEmojis[Math.floor(Math.random() * textEmojis.length)];
-
-        // Ensure reaction and text emojis are different
-        while (textEmoji === reactionEmoji) {
-            textEmoji = textEmojis[Math.floor(Math.random() * textEmojis.length)];
-        }
-
-        // Send reaction using conn.sendMessage()
-        await conn.sendMessage(from, {
-            react: { text: textEmoji, key: mek.key }
-        });
-
-        const end = new Date().getTime();
-        const responseTime = (end - start) / 1000;
-
-        const text = `> *PONG 🕹️:* ${responseTime.toFixed(2)}ms ${reactionEmoji}`;
-
-        await conn.sendMessage(from, {
-            text,
-            contextInfo: {
-                mentionedJid: [sender],
-                forwardingScore: 999,
-                isForwarded: true,
-                forwardedNewsletterMessageInfo: {
-                    newsletterJid: '120363401051383340@newsletter',
-                    newsletterName: "𝚃𝙴𝙲𝙷-𝙷𝙾𝚁𝙸𝚉𝙾𝙽",
-                    serverMessageId: 143
-                }
-            }
-        }, { quoted: mek });
-
-    } catch (e) {
-        console.error("Error in ping command:", e);
-        reply(`An error occurred: ${e.message}`);
+cmd(commandConfig, async (bot, message, args, { from,l,quoted,body,isCmd,command,argsArray,query,isGroup,sender,senderNumber,botNumber2,botNumber,pushname,isMe,isOwner,groupMetadata,groupName,participants,groupAdmins,isBotAdmins,isAdmins,
+  reply
+}) => {
+  try {
+    var startTime = new Date().getTime();
+    
+    const initialMessage = { text: "*_Pinging to Vajira Module..._* ❗" };
+    let sentMessage = await bot.sendMessage(from, initialMessage);
+    
+    var endTime = new Date().getTime();
+    
+    const loadingStages = [
+      "◍○○○○",
+      "◍◍○○○",
+      "◍◍◍○○",
+      "◍◍◍◍○",
+      "◍◍◍◍◍"
+    ];
+    
+    for (let stage of loadingStages) {
+      await bot.sendMessage(from, { text: stage, edit: sentMessage.key });
     }
+    
+    return await bot.sendMessage(from, {
+      text: "📍️ *Pong " + (endTime - startTime) + " Ms* ",
+      edit: sentMessage.key
+    });
+
+  } catch (error) {
+    reply("*Error !!*");
+    l(error);
+  }
 });
-
-// ping2 
-
-cmd({
-    pattern: "ping2",
-    desc: "Check bot's response time.",
-    category: "main",
-    react: "🍂",
-    filename: __filename
-},
-async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
-    try {
-        const startTime = Date.now()
-        const message = await conn.sendMessage(from, { text: '*PINGING...*' })
-        const endTime = Date.now()
-        const ping = endTime - startTime
-        await conn.sendMessage(from, { text: `*HORIZON-MD-V2 SPEED : ${ping}ms*` }, { quoted: message })
-    } catch (e) {
-        console.log(e)
-        reply(`${e}`)
-    }
-})
