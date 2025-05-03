@@ -39,34 +39,8 @@ cmd({
 > ${config.DESCRIPTION}`;
 
 await conn.sendMessage(from,{image: { url: config.MENU_IMAGE_URL || 'https://files.catbox.moe/a9uyng.png' },caption: menuCaption},{quoted: mek})
-      
-
-        // Send image first, then audio sequentially
-        let sentMsg;
-        try {
-            // Send image with 10s timeout
-            sentMsg = await Promise.race([
-                sendMenuImage(),
-                new Promise((_, reject) => setTimeout(() => reject(new Error('Image send timeout')), 10000))
-            ]);
-            
-            // Then send audio with 1s delay and 8s timeout
-            await Promise.race([
-                sendMenuAudio(),
-                new Promise((_, reject) => setTimeout(() => reject(new Error('Audio send timeout')), 8000))
-            ]);
-        } catch (e) {
-            console.log('Menu send error:', e);
-            if (!sentMsg) {
-                sentMsg = await conn.sendMessage(
-                    from,
-                    { text: menuCaption, contextInfo: contextInfo },
-                    { quoted: mek }
-                );
-            }
-        }
         
-        const messageID = sentMsg.key.id;
+
 
         // Menu data (complete version)
         const menuData = {
